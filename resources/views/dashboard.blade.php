@@ -81,18 +81,43 @@
 
             <!-- Próximamente -->
             <div class="mt-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+
                 <div class="p-6">
 
                     <h3 class="text-lg font-semibold text-gray-900">
                         Tu negocio en EstiloCerca
                     </h3>
 
+                    @if (Auth::user()->establishment)
+
                     <p class="mt-2 text-gray-600">
-                        Próximamente podrás registrar y administrar la información de tu establecimiento,
-                        servicios, ubicación, fotografías y medios de contacto.
+                        Establecimiento registrado:
                     </p>
 
+                    <p class="mt-1 font-semibold text-gray-900">
+                        {{ Auth::user()->establishment->name }}
+                    </p>
+
+                    @else
+
+                    <p class="mt-2 text-gray-600">
+                        Aún no has registrado la información de tu establecimiento.
+                    </p>
+
+                    @endif
+
+                    <div class="mt-4">
+
+                        <a
+                            href="{{ route('establishment.edit') }}"
+                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
+                            Administrar mi establecimiento
+                        </a>
+
+                    </div>
+
                 </div>
+
             </div>
 
         </div>
