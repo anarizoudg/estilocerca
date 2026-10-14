@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Establishment;
 
 class EstablishmentController extends Controller
 {
@@ -41,5 +42,16 @@ class EstablishmentController extends Controller
                 'success',
                 'La información del establecimiento se guardó correctamente.'
             );
+    }
+
+    public function show(int $establishment): View
+    {
+        $establishment = Establishment::with('services')
+            ->findOrFail($establishment);
+
+        return view(
+            'establishments.show',
+            compact('establishment')
+        );
     }
 }
