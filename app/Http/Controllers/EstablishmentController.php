@@ -44,6 +44,18 @@ class EstablishmentController extends Controller
             );
     }
 
+    public function index(): View
+    {
+        $establishments = Establishment::query()
+            ->orderBy('name')
+            ->get();
+
+        return view(
+            'establishments.index',
+            compact('establishments')
+        );
+    }
+
     public function show(int $establishment): View
     {
         $establishment = Establishment::with('services')

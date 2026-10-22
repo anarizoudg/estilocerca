@@ -9,6 +9,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/establecimientos', [EstablishmentController::class, 'index'])
+    ->name('establishments.index');
+
 Route::get('/establecimientos/{establishment}', [EstablishmentController::class, 'show'])
     ->name('establishments.show');
 
