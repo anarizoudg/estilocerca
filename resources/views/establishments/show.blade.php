@@ -121,6 +121,19 @@
                             {{ $establishment->whatsapp }}
                         </p>
 
+                        <a
+                            href="https://wa.me/{{ preg_replace('/\D/', '', $establishment->whatsapp) }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center mt-3 px-4 py-2
+                   bg-green-600 border border-transparent
+                   rounded-md font-semibold text-xs text-white
+                   uppercase tracking-widest hover:bg-green-700">
+
+                            Contactar por WhatsApp
+
+                        </a>
+
                     </div>
 
                     @endif

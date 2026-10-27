@@ -44,15 +44,30 @@ class EstablishmentController extends Controller
             );
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
+        $search = trim((string) $request->query('search'));
+
         $establishments = Establishment::query()
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where(function ($subquery) use ($search) {
+                    $subquery
+                        ->whereRaw(
+                            'LOWER(name) LIKE LOWER(?)',
+                            ['%' . $search . '%']
+                        )
+                        ->orWhereRaw(
+                            'LOWER(category) LIKE LOWER(?)',
+                            ['%' . $search . '%']
+                        );
+                });
+            })
             ->orderBy('name')
             ->get();
 
         return view(
             'establishments.index',
-            compact('establishments')
+            compact('establishments', 'search')
         );
     }
 
