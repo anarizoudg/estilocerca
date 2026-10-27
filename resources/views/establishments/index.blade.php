@@ -64,13 +64,69 @@
 
             </div>
 
+            <form
+                method="GET"
+                action="{{ route('establishments.index') }}"
+                class="mb-8">
+
+                <div class="flex flex-col sm:flex-row gap-3">
+
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ $search }}"
+                        placeholder="Buscar por nombre o categoría"
+                        class="flex-1 rounded-md border-gray-300 shadow-sm
+                   focus:border-indigo-500 focus:ring-indigo-500">
+
+                    <button
+                        type="submit"
+                        class="inline-flex justify-center items-center
+                   px-5 py-2 bg-gray-800 border border-transparent
+                   rounded-md font-semibold text-xs text-white
+                   uppercase tracking-widest hover:bg-gray-700">
+
+                        Buscar
+
+                    </button>
+
+                    @if ($search !== '')
+
+                    <a
+                        href="{{ route('establishments.index') }}"
+                        class="inline-flex justify-center items-center
+                       px-5 py-2 bg-white border border-gray-300
+                       rounded-md font-semibold text-xs text-gray-700
+                       uppercase tracking-widest hover:bg-gray-50">
+
+                        Limpiar
+
+                    </a>
+
+                    @endif
+
+                </div>
+
+            </form>
+
             @if ($establishments->isEmpty())
 
             <div class="bg-white rounded-lg shadow-sm p-10 text-center">
 
+                @if ($search !== '')
+
+                <p class="text-gray-600">
+                    No se encontraron establecimientos para
+                    "<strong>{{ $search }}</strong>".
+                </p>
+
+                @else
+
                 <p class="text-gray-600">
                     Aún no hay establecimientos registrados.
                 </p>
+
+                @endif
 
             </div>
 
